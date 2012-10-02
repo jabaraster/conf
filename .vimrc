@@ -15,7 +15,7 @@ set clipboard=unnamed
 set tabstop=4
 set shiftwidth=4
 set list
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:»-,trail:^,eol:↲,extends:»,precedes:«,nbsp:%
 set showmatch
 set smartcase
 set smartindent
@@ -34,6 +34,11 @@ set guioptions-=t
 noremap : ;
 noremap ; :
 
+" 現在行反転
+set cursorline
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
 " 全角スペース・行末のスペース・タブの可視化
 if has("syntax")
 syntax on
@@ -41,7 +46,7 @@ syntax on
 " podバグ対策
 syn sync fromstart
 
-function! activateinvisibleindicator()
+function! ActivateIinvisibleIndicator()
 	syntax match invisiblejisx0208space "　" display containedin=all
 	highlight invisiblejisx0208space term=underline ctermbg=blue guibg=darkgray gui=underline
 	"syntax match invisibletrailedspace "[ \t]\+$" display containedin=all
@@ -51,6 +56,6 @@ function! activateinvisibleindicator()
 	endf
 	augroup invisible
 	autocmd! invisible
-autocmd bufnew,bufread * call activateinvisibleindicator()
+autocmd bufnew,bufread * call ActivateInvisibleIndicator()
 	augroup end
 endif
