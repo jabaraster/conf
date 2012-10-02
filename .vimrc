@@ -1,30 +1,56 @@
 " http://nanasi.jp/
 
-
 " http://nanasi.jp/articles/howto/config/colorscheme.html
 colorscheme solarized
 "colorscheme zenburn
-"colorscheme ChocolateLiquor
+"colorscheme chocolateliquor
 "colorscheme molokai
 
 " http://blog.blueblack.net/item_110
-set autoindent
+"set autoindent
 "set hidden
 set incsearch
 set number
 set clipboard=unnamed
 set tabstop=4
+set shiftwidth=4
 set list
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set showmatch
 set smartcase
 set smartindent
-set whichwrap=b,s,h,l,<,>,[,]
+
+" タブ文字の代わりに半角空白を挿入する
+set expandtab
+
+" 行頭から前の位置にカーソルを移動したときに前行の行末に移動する設定
+" set whichwrap=b,s,h,l,<,>,[,]
 set wrapscan
 
-" http://code.google.com/p/macvim-kaoriya/wiki/Readme#vimrc/gvimrc
+" http://code.google.com/p/macvim-kaoriya/wiki/readme#vimrc/gvimrc
 " ツールバー非表示
-set guioptions-=T
+set guioptions-=t
 
 noremap : ;
 noremap ; :
 
+" 全角スペース・行末のスペース・タブの可視化
+if has("syntax")
+syntax on
+
+" podバグ対策
+syn sync fromstart
+
+function! activateinvisibleindicator()
+	syntax match invisiblejisx0208space "　" display containedin=all
+	highlight invisiblejisx0208space term=underline ctermbg=blue guibg=darkgray gui=underline
+	"syntax match invisibletrailedspace "[ \t]\+$" display containedin=all
+	"highlight invisibletrailedspace term=underline ctermbg=red guibg=none gui=undercurl guisp=darkorange
+	"syntax match invisibletab "\t" display containedin=all
+	"highlight invisibletab term=underline ctermbg=white gui=undercurl guisp=darkslategray
+	endf
+	augroup invisible
+	autocmd! invisible
+autocmd bufnew,bufread * call activateinvisibleindicator()
+	augroup end
+endif
