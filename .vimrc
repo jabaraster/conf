@@ -1,10 +1,26 @@
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+Bundle 'molokai'
+Bundle 'git://github.com/dag/vim2hs.git'
+Bundle 'git://github.com/ujihisa/neco-ghc.git'
+
+
+filetype plugin indent on     " required!
+
 " http://nanasi.jp/
 
 " http://nanasi.jp/articles/howto/config/colorscheme.html
-colorscheme solarized
+"colorscheme solarized
 "colorscheme zenburn
 "colorscheme chocolateliquor
-"colorscheme molokai
+colorscheme molokai
 
 " http://blog.blueblack.net/item_110
 "set autoindent
@@ -59,3 +75,12 @@ function! ActivateIinvisibleIndicator()
 autocmd bufnew,bufread * call ActivateInvisibleIndicator()
 	augroup end
 endif
+
+set nocompatible
+filetype off
+
+Bundle 'git://github.com/altercation/vim-colors-solarized.git'
+
+filetype plugin indent on
+
+
