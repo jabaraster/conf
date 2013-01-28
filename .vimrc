@@ -11,6 +11,10 @@ Bundle 'molokai'
 Bundle 'git://github.com/dag/vim2hs.git'
 Bundle 'git://github.com/ujihisa/neco-ghc.git'
 
+Bundle 'quickrun.vim'
+Bundle 'Markdown'
+
+Bundle 'http://www.vim.org/scripts/script.php?script_id=362'
 
 filetype plugin indent on     " required!
 
@@ -47,6 +51,10 @@ set wrapscan
 " ツールバー非表示
 set guioptions-=t
 
+" 自動改行の抑止
+set tw=0
+set formatoptions=q
+
 noremap : ;
 noremap ; :
 
@@ -62,7 +70,7 @@ syntax on
 " podバグ対策
 syn sync fromstart
 
-function! ActivateIinvisibleIndicator()
+function! ActivateInvisibleIndicator()
 	syntax match invisiblejisx0208space "　" display containedin=all
 	highlight invisiblejisx0208space term=underline ctermbg=blue guibg=darkgray gui=underline
 	"syntax match invisibletrailedspace "[ \t]\+$" display containedin=all
@@ -76,11 +84,5 @@ autocmd bufnew,bufread * call ActivateInvisibleIndicator()
 	augroup end
 endif
 
-set nocompatible
-filetype off
-
-Bundle 'git://github.com/altercation/vim-colors-solarized.git'
-
-filetype plugin indent on
-
-
+autocmd BufRead,BufNewFile *.mkd  setfiletype mkd
+autocmd BufRead,BufNewFile *.md  setfiletype mkd
