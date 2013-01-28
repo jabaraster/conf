@@ -14,7 +14,8 @@ Bundle 'git://github.com/ujihisa/neco-ghc.git'
 Bundle 'quickrun.vim'
 Bundle 'Markdown'
 
-Bundle 'http://www.vim.org/scripts/script.php?script_id=362'
+" Bundle 'http://www.vim.org/scripts/script.php?script_id=362'
+Bundle 'scrooloose/nerdtree'
 
 filetype plugin indent on     " required!
 
@@ -55,11 +56,31 @@ set guioptions-=t
 set tw=0
 set formatoptions=q
 
-noremap : ;
-noremap ; :
+" 検索時に大文字小文字を区別しない
+set ignorecase
+
+"ファイルの上書きの前にバックアップを作る/作らない
+"set writebackupを指定してもオプション 'backup' がオンでない限り、
+"バックアップは上書きに成功した後に削除される。
+set nowritebackup
+
+"バックアップ/スワップファイルを作成する/しない
+set nobackup
 
 " 現在行反転
 set cursorline
+
+noremap : ;
+noremap ; :
+
+" .vimrcを開く
+nnoremap <Space>.  :<C-u>edit $MYVIMRC<CR>
+
+" source ~/.vimrc を実行する。
+nnoremap <Space>,  :<C-u>source $MYVIMRC<CR> 
+
+nnoremap <Space>t  :NERDTree<CR> 
+
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 highlight CursorLine gui=underline guifg=NONE guibg=NONE
 
